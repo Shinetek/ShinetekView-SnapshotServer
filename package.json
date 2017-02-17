@@ -1,0 +1,15 @@
+{
+  "name": "mips_snipping",
+  "version": "0.0.1",
+  "description": "mips snipping tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "fantasylin",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^1.3.15",
+    "restify": "^4.0.4"
+  }
+}

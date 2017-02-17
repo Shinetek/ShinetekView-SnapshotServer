@@ -1,0 +1,21 @@
+{
+    "BasePath" : "/MIPS/MIPSOUT/",
+    "OutPath" : "/MIPS/SNIPPINGOUT/",
+    "fy3c" : {
+        "mersi" : {
+            "orgResolution" : 250
+        },
+        "virr" : {
+            "orgResolution" : 1000
+        }
+    },
+
+    "fy3d" : {
+        "mersi" : {
+            "orgResolution" : 250
+        },
+        "virr" : {
+            "orgResolution" : 1000
+        }
+    }
+}
