@@ -6,7 +6,6 @@ var restify = require("restify");
 var server = restify.createServer({
     name: "Mips_Snipping_Server"
 });
- S
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.use(restify.CORS());
