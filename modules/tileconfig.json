@@ -3,14 +3,17 @@
         "SatType" : "GEO",
         "OutPath" : "/FY4A/TMP/",
         "FY4A_AGRI_PRJ_500M_0064":{
-            "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/PRJ/",
+            "BasePath1" : "/FY4COMM/FY4A/L2/AGRIX/PRJ/",
+            "BasePath" : "F://git//ShinetekView-SnapshotServer//DATA//",
             "Res":"500",
             "Desc":"可见光云图(500m)",
             "Key":"PRJ1",
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"14001",
+            "Height":"12001"
         },
         "FY4A_AGRI_EVI":{
             "BasePath" : "/FY4COMM/FY4A/L3/AGRIX/EVI/",
@@ -223,14 +226,17 @@
             "BottomRightLon":"140"
         },
         "FY4A_AGRI_QPE":{
-            "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/QPE/",
+            "BasePath1" : "/FY4COMM/FY4A/L2/AGRIX/QPE/",
+            "BasePath" : "F://git//ShinetekView-SnapshotServer//DATA//",
             "Res":"4000",
             "Desc":"降水检测",
             "Key":"QPE",
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width" : "1751",
+            "Height" : "1501"
         },
         "FY4A_AGRI_LST":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/LST/",

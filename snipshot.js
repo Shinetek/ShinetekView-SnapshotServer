@@ -12,6 +12,11 @@ var PATH = "/snipshot";
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.use(restify.CORS());
+// server.use(function (req,res,next) {
+//    setTimeout(function () {
+//        return next();
+//    },5 * 60 * 1000);
+// });
 /**
  * prodtype
  * toplat
@@ -39,13 +44,17 @@ function _snip_GLL(req,res,next) {
     var dateTime = req.params.date;     //时次
     var fileType = req.params.filetype;     //文件类型，jpg or png
 
-
+    var isFind = false;
     for(var tmpConfig in satConfig) {
         var config = satConfig[tmpConfig][prodType];
         //根据参数找到配置信息
         if (config !== undefined) {
+            isFind = true;
             break;
         }
+    }
+    if(!isFind){
+        next("find config error",null);
     }
     var module = require('./modules/snip_' + satConfig[tmpConfig]["SatType"] + '.js');
 
