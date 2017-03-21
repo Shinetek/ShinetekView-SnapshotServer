@@ -3,7 +3,7 @@
         "SatType" : "GEO",
         "OutPath" : "/FY4A/TMP/",
         "FY4A_AGRI_PRJ_500M_0064":{
-            "BasePath" : "/DATA/",
+            "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/PRJ/",
             "Res":"500",
             "Desc":"可见光云图(500m)",
             "Key":"PRJ1",
