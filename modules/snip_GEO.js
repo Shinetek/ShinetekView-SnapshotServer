@@ -5,7 +5,8 @@
 var fs = require("fs");
 var Canvas = require("canvas");
 var Image = Canvas.Image;
-var walk = require("walk");
+var glob = require("glob");
+
 /**
  * 截图
  * @param config 配置信息
@@ -20,55 +21,65 @@ var walk = require("walk");
  */
 exports.snipImage_GLL = function (config,outPutPath,t_l_lat,t_l_lon,b_r_lat,b_r_lon,dateTime,fileType, next) {
 
+    console.log("snipImage_GLL start");
     //查找原图文件
-    var options = {
-        followLinks:true,
-        filters:[dateTime,config.Res,config.Key,fileType]
-    };
-    var walker = walk.walk(config.BasePath,options);
-    walker.on("names",function (root,nodeNameArray) {
-        var isFind = false;
-        for(var tmpName in nodeNameArray){
-            if(nodeNameArray[tmpName].indexOf(dateTime)!=-1 && nodeNameArray[tmpName].indexOf(config.Res)!=-1 && nodeNameArray[tmpName].indexOf(config.Key)!=-1 && nodeNameArray[tmpName].indexOf(fileType)!=-1){
+    var filterKey = "*" + dateTime + "*." + fileType;
+    glob(config.BasePath + filterKey,function(err,files){
+        for(var tmpName in files){
+           
+            if(files[tmpName].indexOf(config.Res)!=-1 && files[tmpName].indexOf(config.Key)!=-1){
                 isFind = true;
-                var srcImagePath = config.BasePath + "\\" + nodeNameArray[tmpName];
+                console.log("find");
+                var srcImagePath = files[tmpName];
+                srcImagePath = config.BasePath + "H8_20170322_0040_15_155_-80_80_1000M.jpg";
+                console.log(srcImagePath);
                 //获取原图的大小
                 var srcWidth = config.Width;
                 var srcHeight = config.Height;
                 //计算原图经纬度范围
                 var srcLatDiff = Math.abs(config.TopLeftLat - config.BottomRightLat);
-                var srcLonDiff = Math.abs(config.BottomRightLon - config.TopLeftLon);
-                var perLatLine = Math.floor(srcHeight / srcLatDiff);
-                var perLonLine = Math.floor(srcWidth / srcLonDiff);
+                var srcLonDiff = config.BottomRightLon - config.TopLeftLon;
+                if(srcLonDiff < 0){
+                    srcLonDiff += 360;
+                }
+                var perLatLine = srcHeight / srcLatDiff;
+                var perLonLine = srcWidth / srcLonDiff;
+                console.log("srcLatDiff="+srcLatDiff);
+                console.log("srcLonDiff="+srcLonDiff);
+                console.log("perLatLine="+perLatLine);
+                console.log("perLonLine="+perLonLine);
                 //计算截图大小
-                var cutWidth = Math.abs(b_r_lon - t_l_lon) * perLonLine;
-                var cutHeight = Math.abs(t_l_lat - b_r_lat) * perLatLine;
+                var cutWidth = Math.floor(Math.abs(b_r_lon - t_l_lon) * perLonLine);
+                var cutHeight = Math.floor(Math.abs(t_l_lat - b_r_lat) * perLatLine);
                 //计算截图区域在原图中的行列
-                var iOffset = (t_l_lon - config.TopLeftLon) * perLonLine;
-                var jOffset = (config.TopLeftLat - t_l_lat) * perLatLine;
-                fs.readFile(srcImagePath,function (err,data) {
+                var iOffset = Math.floor((t_l_lon - config.TopLeftLon) * perLonLine * -1);
+                var jOffset = Math.floor((config.TopLeftLat - t_l_lat) * perLatLine * -1);
+                console.log("srcWidth="+srcWidth);
+                console.log("srcHeight="+srcHeight);
+                console.log("cutWidth="+cutWidth);
+                console.log("cutHeight="+cutHeight);
+                console.log("iOffset="+iOffset);
+                console.log("jOffset="+jOffset);                                   
+
+                fs.readFile(srcImagePath,function (err,buf) {
                     if(err){
                         next(err,null);
                     }
+                                
                     var canvas = new Canvas(cutWidth,cutHeight);
                     var ctx = canvas.getContext('2d');
                     var srcImg = new Image;
-                    srcImg.src = data;
-                    srcImg.onload = function () {
-                       // ctx.drawImage(srcImg,iOffset,jOffset,cutWidth,cutHeight);
-                        ctx.drawImage(srcImg,0,0,cutWidth,cutHeight);
-                        //ctx.save();
-                        var stream = canvas.jpegStream();
-                        next(null,stream);
-                    };
+                    srcImg.src = buf;
+                    ctx.drawImage(srcImg,iOffset,jOffset,srcWidth,srcHeight);  
+                    console.log("draw ok");                                                               
+                    next(null,canvas.toBuffer());                    
+                                   
                 });
             }
         }
         if(!isFind){
             next("find error",null);
         }
-
     });
-
-
+   
 }

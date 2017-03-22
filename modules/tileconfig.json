@@ -3,8 +3,7 @@
         "SatType" : "GEO",
         "OutPath" : "/FY4A/TMP/",
         "FY4A_AGRI_PRJ_500M_0064":{
-            "BasePath1" : "/FY4COMM/FY4A/L2/AGRIX/PRJ/",
-            "BasePath" : "F://git//ShinetekView-SnapshotServer//DATA//",
+            "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/PRJ/",
             "Res":"500",
             "Desc":"可见光云图(500m)",
             "Key":"PRJ1",
@@ -15,6 +14,18 @@
             "Width":"14001",
             "Height":"12001"
         },
+        "FY4A_AGRI_NOM":{
+            "BasePath" : "/home/lihy/workstation/test/",
+            "Res":"2000",
+            "Desc":"可见光云图(2000m)",
+            "Key":"NOM",
+            "TopLeftLat":"80",
+            "TopLeftLon":"85",
+            "BottomRightLat":"-80",
+            "BottomRightLon":"-165",
+            "Width":"9555",
+            "Height":"16000"
+        },
         "FY4A_AGRI_EVI":{
             "BasePath" : "/FY4COMM/FY4A/L3/AGRIX/EVI/",
             "Res":"1000",
@@ -23,7 +34,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"7001",
+            "Height":"6001"
         },
         "FY4A_AGRI_NVI":{
             "BasePath" : "/FY4COMM/FY4A/L3/AGRIX/NVI/",
@@ -33,7 +46,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"7001",
+            "Height":"6001"
         },
         "FY4A_AGRI_PRJ_1000M_0086":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/PRJ/",
@@ -43,7 +58,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"7001",
+            "Height":"6001"
         },
         "FY4A_AGRI_PRJ_2000M_1120":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/PRJ/",
@@ -53,7 +70,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"3501",
+            "Height":"3001"
         },
         "FY4A_AGRI_VWI":{
             "BasePath" : "/FY4COMM/FY4A/L3/AGRIX/VWI/",
@@ -63,7 +82,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"7001",
+            "Height":"6001"
         },
         "FY4A_AGRI_ACI":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/ACI/",
@@ -73,7 +94,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"7001",
+            "Height":"6001"
         },
         "FY4A_AGRI_CLM":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CLM/",
@@ -83,7 +106,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_ConvectiveInitiation":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CIX/",
@@ -93,7 +118,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_CLP":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CLP/",
@@ -103,7 +130,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_CLT":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CLT/",
@@ -113,7 +142,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_CTH":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CTH/",
@@ -123,7 +154,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_CTP":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CTP/",
@@ -133,7 +166,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_CTT":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CTT/",
@@ -143,7 +178,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_CPD_COT":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CPD/",
@@ -153,7 +190,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_CPD_CER":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CPD/",
@@ -163,7 +202,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_CPD_LWP":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CPD/",
@@ -173,7 +214,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_CPD_IWP":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CPD/",
@@ -183,7 +226,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_FOG":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/FOG/",
@@ -193,7 +238,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_OCA_ADO0":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/OCA/",
@@ -203,7 +250,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_LDA_ADO1":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/LDA/",
@@ -213,7 +262,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_DSD":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/DSD/",
@@ -223,11 +274,13 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_QPE":{
             "BasePath1" : "/FY4COMM/FY4A/L2/AGRIX/QPE/",
-            "BasePath" : "F://git//ShinetekView-SnapshotServer//DATA//",
+            "BasePath" : "/home/lihy/workstation/test/",
             "Res":"4000",
             "Desc":"降水检测",
             "Key":"QPE",
@@ -246,7 +299,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_SST":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/SST/",
@@ -256,7 +311,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         },
         "FY4A_AGRI_OCA_ADO1":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/OCA/",
@@ -266,7 +323,9 @@
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
-            "BottomRightLon":"140"
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
         }
     },
     "noaa18": {
@@ -292,8 +351,8 @@
     "npp": {
       "SatType" : "POS",
       "OutPath": "/NPP/TMP/",
-     "NPP_VIIRS": {
-       "BasePath": "/",
+      "NPP_VIIRS": {
+        "BasePath": "/",
         "Res": "",
         "Desc": "大气校正图(真彩色)",
         "Key": ""
@@ -301,12 +360,12 @@
   },
     "terra": {
       "SatType" : "POS",
-    "OutPath": "/TERRA/TMP/",
-    "TERRA_MODIS_010901": {
-      "BasePath": "/",
-      "Res": "",
-      "Desc": "大气校正图(真彩色)",
-      "Key": ""
+      "OutPath": "/TERRA/TMP/",
+      "TERRA_MODIS_010901": {
+        "BasePath": "/",
+        "Res": "",
+        "Desc": "大气校正图(真彩色)",
+        "Key": ""
     }
   }
 }
