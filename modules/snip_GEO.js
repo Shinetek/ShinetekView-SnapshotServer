@@ -9,6 +9,7 @@ var glob = require("glob");
 
 /**
  * 截图
+ * @param res 
  * @param config 配置信息
  * @param outPutPath 输出的临时目录
  * @param t_l_lat 截图范围左上角纬度
@@ -19,7 +20,7 @@ var glob = require("glob");
  * @param fileType 截取文件类型，jpg or png
  * @param next
  */
-exports.snipImage_GLL = function (config,outPutPath,t_l_lat,t_l_lon,b_r_lat,b_r_lon,dateTime,fileType, next) {
+exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,b_r_lon,dateTime,fileType, next) {
 
     console.log("snipImage_GLL start");
     //查找原图文件

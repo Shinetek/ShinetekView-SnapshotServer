@@ -58,7 +58,7 @@ function _snip_GLL(req,res,next) {
     }
     var module = require('./modules/snip_' + satConfig[tmpConfig]["SatType"] + '.js');
 
-    module.snipImage_GLL(config,satConfig["OutPath"],topLeftLat,topLeftLon,bottomRightLat,bottomRightLon,dateTime,fileType, function (err, data) {
+    module.snipImage_GLL(res,config,satConfig["OutPath"],topLeftLat,topLeftLon,bottomRightLat,bottomRightLon,dateTime,fileType, function (err, data) {
         if (err) {
             next(err, null);
         }
