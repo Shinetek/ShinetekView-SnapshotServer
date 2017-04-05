@@ -33,7 +33,7 @@ exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,
                 isFind = true;
                 console.log("find file");
                 var srcImagePath = files[tmpName];
-                srcImagePath = config.BasePath + "H8_20170322_0040_15_155_-80_80_1000M.jpg";
+                //srcImagePath = config.BasePath + "H8_20170322_0040_15_155_-80_80_1000M.jpg";
                 console.log(srcImagePath);
                 //获取原图的大小
                 var srcWidth = config.Width;
