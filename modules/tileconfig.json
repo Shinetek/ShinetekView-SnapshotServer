@@ -14,17 +14,17 @@
             "Width":"14001",
             "Height":"12001"
         },
-        "FY4A_AGRI_NOM":{
-            "BasePath" : "/home/lihy/workstation/test/",
-            "Res":"2000M",
+        "FY4A_AGRI_PRJ_4000M_0137":{
+            "BasePath" : "/CVSDATANAS/FY4A/AGRI/D1B/CVSIMAGE/PRJ/",
+            "Res":"4000M",
             "Desc":"可见光云图(2000m)",
-            "Key":"NOM",
-            "TopLeftLat":"80",
-            "TopLeftLon":"85",
-            "BottomRightLat":"-80",
-            "BottomRightLon":"-165",
-            "Width":"9555",
-            "Height":"16000"
+            "Key":"PRJ4_EVB0137",
+            "TopLeftLat":"70",
+            "TopLeftLon":"44",
+            "BottomRightLat":"-70",
+            "BottomRightLon":"155",
+            "Width":"2776",
+            "Height":"3500"
         },
         "FY4A_AGRI_EVI":{
             "BasePath" : "/FY4COMM/FY4A/L3/AGRIX/EVI/",
@@ -332,18 +332,26 @@
         "SatType" : "POS",
         "OutPath": "/FY3C/TMP/",
         "FY3C_VIRR_121": {
-          "BasePath": "/",
-          "Res": "250M",
-          "Desc": "大气校正图(真彩色121)",
-          "Width":"4000",
-          "Height":"4000"
+            "BasePath": "/",
+            "Res": "250M",
+            "Desc": "大气校正图(真彩色121)",
+            "Width":"4000",
+            "Height":"4000",
+            "LatScope":"10",
+            "LonScope":"10",
+            "key1":"FY3C_VIRR",
+            "Key2":"01_02_01"
         },
         "FY3C_VIRR_191": {
-          "BasePath": "/",
-          "Res": "250M",
-          "Desc": "大气校正图(真彩色191)",
-          "Width":"4000",
-          "Height":"4000"
+            "BasePath": "/",
+            "Res": "250M",
+            "Desc": "大气校正图(真彩色191)",
+            "Width":"4000",
+            "Height":"4000",
+            "LatScope":"10",
+            "LonScope":"10",
+            "key1":"FY3C_VIRR",
+            "Key":"01_09_01"
         }
     },
     "noaa18": {

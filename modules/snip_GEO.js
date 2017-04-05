@@ -21,16 +21,17 @@ var glob = require("glob");
  * @param next
  */
 exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,b_r_lon,dateTime,fileType, next) {
-
     console.log("snipImage_GLL start");
     //查找原图文件
     var filterKey = "*" + dateTime + "*." + fileType;
     glob(config.BasePath + filterKey,function(err,files){
+        if(err){
+            next(err,null);
+        }
         for(var tmpName in files){
-           
             if(files[tmpName].indexOf(config.Res)!=-1 && files[tmpName].indexOf(config.Key)!=-1){
                 isFind = true;
-                console.log("find");
+                console.log("find file");
                 var srcImagePath = files[tmpName];
                 srcImagePath = config.BasePath + "H8_20170322_0040_15_155_-80_80_1000M.jpg";
                 console.log(srcImagePath);

@@ -7,7 +7,7 @@ var server = restify.createServer({
     version:"0.0.1"
 });
 var serverIP = shkUtil.getLoacalIP();
-var port = (process.argv[2]) ? process.argv[2] : 4205;
+var port = (process.argv[2]) ? process.argv[2] : 40205;
 var PATH = "/snipshot";
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
