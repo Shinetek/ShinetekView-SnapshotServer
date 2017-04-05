@@ -24,11 +24,17 @@ exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,
     console.log("snipImage_GLL start");
     //查找原图文件
     var filterKey = "*" + dateTime + "*." + fileType;
+    console.log(filterKey);
+    var isFind = false;
+    console.log(config.BasePath + filterKey);
     glob(config.BasePath + filterKey,function(err,files){
         if(err){
+            console.log("find error");
             next(err,null);
         }
+        console.log(files.length);
         for(var tmpName in files){
+            console.log(files[tmpName]);
             if(files[tmpName].indexOf(config.Res)!=-1 && files[tmpName].indexOf(config.Key)!=-1){
                 isFind = true;
                 console.log("find file");
@@ -80,6 +86,7 @@ exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,
             }
         }
         if(!isFind){
+            console.log("find error");
             next("find error",null);
         }
     });

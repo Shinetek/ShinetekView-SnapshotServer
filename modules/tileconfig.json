@@ -14,11 +14,12 @@
             "Width":"14001",
             "Height":"12001"
         },
-        "FY4A_AGRI_PRJ_4000M_0137":{
+        "FY4A_AGRI_PRJ_4000M_1350":{
             "BasePath" : "/CVSDATANAS/FY4A/AGRI/D1B/CVSIMAGE/PRJ/",
+            "BasePath1" : "/home/lihy/workstation/test/",
             "Res":"4000M",
             "Desc":"可见光云图(2000m)",
-            "Key":"PRJ4_EVB0137",
+            "Key":"PRJ4_EVB1350",
             "TopLeftLat":"70",
             "TopLeftLon":"44",
             "BottomRightLat":"-70",
