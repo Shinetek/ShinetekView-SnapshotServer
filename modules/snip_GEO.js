@@ -23,10 +23,10 @@ var glob = require("glob");
 exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,b_r_lon,dateTime,fileType, next) {
     console.log("snipImage_GLL start");
     //查找原图文件
-    var filterKey = "*" + dateTime + "*." + fileType;
+    var filterKey = "*" + dateTime + "*" + fileType;
     console.log(filterKey);
     var isFind = false;
-    console.log(config.BasePath + filterKey);
+    console.log(config.BasePath  + filterKey);
     glob(config.BasePath + filterKey,function(err,files){
         if(err){
             console.log("find error");
@@ -35,7 +35,7 @@ exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,
         console.log(files.length);
         for(var tmpName in files){
             console.log(files[tmpName]);
-            if(files[tmpName].indexOf(config.Res)!=-1 && files[tmpName].indexOf(config.Key)!=-1){
+            if(files[tmpName].indexOf(config.Res)!=-1 && files[tmpName].indexOf(config.Key)!=-1 && files[tmpName].indexOf("THUMB")==-1){
                 isFind = true;
                 console.log("find file");
                 var srcImagePath = files[tmpName];
@@ -78,10 +78,10 @@ exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,
                     var ctx = canvas.getContext('2d');
                     var srcImg = new Image;
                     srcImg.src = buf;
-                    ctx.drawImage(srcImg,iOffset,jOffset,srcWidth,srcHeight);  
+                    ctx.drawImage(srcImg,iOffset,jOffset,srcWidth,srcHeight);
                     console.log("draw ok");                                                               
                     next(null,canvas.toBuffer());                    
-                                   
+
                 });
             }
         }

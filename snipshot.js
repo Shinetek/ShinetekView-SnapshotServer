@@ -7,7 +7,7 @@ var server = restify.createServer({
     version:"0.0.1"
 });
 var serverIP = shkUtil.getLoacalIP();
-var port = (process.argv[2]) ? process.argv[2] : 40205;
+var port = (process.argv[2]) ? process.argv[2] : 4205;
 var PATH = "/snipshot";
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
@@ -56,12 +56,22 @@ function _snip_GLL(req,res,next) {
     if(!isFind){
         next("find config error",null);
     }
+    else{
+        console.log("find config");
+    }
     var module = require('./modules/snip_' + satConfig[tmpConfig]["SatType"] + '.js');
-
+    console.log("find module");
     module.snipImage_GLL(res,config,satConfig["OutPath"],topLeftLat,topLeftLon,bottomRightLat,bottomRightLon,dateTime,fileType, function (err, data) {
         if (err) {
             next(err, null);
         }
+        // if (fileType.toLowerCase() == ".jpg") {
+        //     res.writeHeader("Content-Type", "image/jpeg");
+        // }
+        // else{
+        //     res.writeHeader("Content-Type", "image/png");
+        // }
+        //res.title("test.jpg");
         res.end(data);
         next();
     });

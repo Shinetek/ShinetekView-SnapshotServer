@@ -15,23 +15,23 @@
             "Height":"12001"
         },
         "FY4A_AGRI_PRJ_4000M_1350":{
-            "BasePath" : "/CVSDATANAS/FY4A/AGRI/D1B/CVSIMAGE/PRJ/",
-            "BasePath1" : "/home/lihy/workstation/test/",
+            "BasePath1" : "/CVSDATANAS/FY4A/AGRI/D1B/CVSIMAGE/PRJ/",
+            "BasePath" : "/FY4COMM/webclient/ShinetekView-SnapshotServer/DATA/",
             "Res":"4000M",
             "Desc":"可见光云图(2000m)",
-            "Key":"PRJ4_EVB1350",
+            "Key":"QPE",
             "TopLeftLat":"70",
             "TopLeftLon":"44",
             "BottomRightLat":"-70",
             "BottomRightLon":"155",
-            "Width":"2776",
-            "Height":"3500"
+            "Width":"1751",
+            "Height":"1501"
         },
-        "FY4A_AGRI_EVI":{
-            "BasePath" : "/FY4COMM/FY4A/L3/AGRIX/EVI/",
+        "FY4A_AGRI_EVI_1000":{
+            "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/EVI/",
             "Res":"1000M",
             "Desc":"增强型植被指数",
-            "Key":"EVI",
+            "Key":"_1000M_EVI",
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
@@ -39,7 +39,7 @@
             "Width":"7001",
             "Height":"6001"
         },
-        "FY4A_AGRI_NVI":{
+        "FY4A_AGRI_NVI_1000":{
             "BasePath" : "/FY4COMM/FY4A/L3/AGRIX/NVI/",
             "Res":"1000M",
             "Desc":"归一化植被指数",
@@ -75,7 +75,7 @@
             "Width":"3501",
             "Height":"3001"
         },
-        "FY4A_AGRI_VWI":{
+        "FY4A_AGRI_VWI_1000":{
             "BasePath" : "/FY4COMM/FY4A/L3/AGRIX/VWI/",
             "Res":"1000M",
             "Desc":"植被供水指数",
@@ -87,7 +87,7 @@
             "Width":"7001",
             "Height":"6001"
         },
-        "FY4A_AGRI_ACI":{
+        "FY4A_AGRI_ACI_1000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/ACI/",
             "Res":"1000M",
             "Desc":"真彩色云图(1000m)",
@@ -99,7 +99,7 @@
             "Width":"7001",
             "Height":"6001"
         },
-        "FY4A_AGRI_CLM":{
+        "FY4A_AGRI_CLM_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CLM/",
             "Res":"4000M",
             "Desc":"云检测",
@@ -111,7 +111,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_ConvectiveInitiation":{
+        "FY4A_AGRI_ConvectiveInitiation_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CIX/",
             "Res":"4000M",
             "Desc":"对流初生(强度)",
@@ -123,7 +123,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_CLP":{
+        "FY4A_AGRI_CLP_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CLP/",
             "Res":"4000M",
             "Desc":"云相态",
@@ -135,7 +135,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_CLT":{
+        "FY4A_AGRI_CLT_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CLT/",
             "Res":"4000M",
             "Desc":"云类型",
@@ -147,7 +147,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_CTH":{
+        "FY4A_AGRI_CTH_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CTH/",
             "Res":"4000M",
             "Desc":"云顶高度",
@@ -159,7 +159,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_CTP":{
+        "FY4A_AGRI_CTP_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CTP/",
             "Res":"4000M",
             "Desc":"云顶气压",
@@ -171,7 +171,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_CTT":{
+        "FY4A_AGRI_CTT_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CTT/",
             "Res":"4000M",
             "Desc":"云顶温度",
@@ -183,7 +183,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_CPD_COT":{
+        "FY4A_AGRI_CPD_COT_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CPD/",
             "Res":"4000M",
             "Desc":"白天云微物理-云光学厚度",
@@ -195,7 +195,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_CPD_CER":{
+        "FY4A_AGRI_CPD_CER_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CPD/",
             "Res":"4000M",
             "Desc":"白天云微物理-云有效粒子半径",
@@ -207,7 +207,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_CPD_LWP":{
+        "FY4A_AGRI_CPD_LWP_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CPD/",
             "Res":"4000M",
             "Desc":"白天云微物理-云液体",
@@ -219,7 +219,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_CPD_IWP":{
+        "FY4A_AGRI_CPD_IWP_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CPD/",
             "Res":"4000M",
             "Desc":"白天云微物理-冰水",
@@ -231,7 +231,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_FOG":{
+        "FY4A_AGRI_FOG_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/FOG/",
             "Res":"4000M",
             "Desc":"雾检测",
@@ -243,7 +243,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_OCA_ADO0":{
+        "FY4A_AGRI_OCA_ADO0_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/OCA/",
             "Res":"4000M",
             "Desc":"海洋气溶胶(0.47um)",
@@ -255,7 +255,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_LDA_ADO1":{
+        "FY4A_AGRI_LDA_ADO1_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/LDA/",
             "Res":"4000M",
             "Desc":"陆地气溶胶(0.55um)",
@@ -267,7 +267,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_DSD":{
+        "FY4A_AGRI_DSD_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/DSD/",
             "Res":"4000M",
             "Desc":"沙尘检测",
@@ -279,7 +279,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_QPE":{
+        "FY4A_AGRI_QPE_4000":{
             "BasePath1" : "/FY4COMM/FY4A/L2/AGRIX/QPE/",
             "BasePath" : "/home/lihy/workstation/test/",
             "Res":"4000M",
@@ -292,7 +292,7 @@
             "Width" : "1751",
             "Height" : "1501"
         },
-        "FY4A_AGRI_LST":{
+        "FY4A_AGRI_LST_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/LST/",
             "Res":"4000M",
             "Desc":"地表温度",
@@ -304,7 +304,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_SST":{
+        "FY4A_AGRI_SST_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/SST/",
             "Res":"4000M",
             "Desc":"海表温度",
@@ -316,7 +316,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_OCA_ADO1":{
+        "FY4A_AGRI_OCA_ADO1_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/OCA/",
             "Res":"4000M",
             "Desc":"海洋气溶胶(0.65um)",
@@ -327,6 +327,32 @@
             "BottomRightLon":"140",
             "Width":"1751",
             "Height":"1501"
+        }
+    },
+    "fy3b": {
+        "SatType" : "POS",
+        "OutPath": "/FY3B/TMP/",
+        "FY3B_MERSI_321": {
+            "BasePath": "/FY4COMM/webclient/ShinetekView-SnapshotServer/DATA/FY3B/MIPSOUT/",
+            "Res": "250M",
+            "Desc": "大气校正图(真彩色321)",
+            "Width":"4000",
+            "Height":"4000",
+            "LatScope":"10",
+            "LonScope":"10",
+            "key1":"FY3B_MERSI",
+            "key2":"03_02_01"
+        },
+        "FY3B_MERSI_743": {
+            "BasePath": "/FY4COMM/webclient/ShinetekView-SnapshotServer/DATA/FY3B/MIPSOUT/",
+            "Res": "250M",
+            "Desc": "大气校正图(真彩色743)",
+            "Width":"4000",
+            "Height":"4000",
+            "LatScope":"10",
+            "LonScope":"10",
+            "key1":"FY3B_MERSI",
+            "key2":"07_04_03"
         }
     },
     "fy3c": {
@@ -341,7 +367,7 @@
             "LatScope":"10",
             "LonScope":"10",
             "key1":"FY3C_VIRR",
-            "Key2":"01_02_01"
+            "key2":"01_02_01"
         },
         "FY3C_VIRR_191": {
             "BasePath": "/",
@@ -362,7 +388,8 @@
           "BasePath": "/",
           "Res": "",
           "Desc": "大气校正图(真彩色)",
-          "Key": ""
+          "key1": "",
+            "key2":""
         }
     },
     "noaa19": {
@@ -372,7 +399,8 @@
           "BasePath": "/",
           "Res": "",
           "Desc": "大气校正图(真彩色)",
-          "Key": ""
+            "key1": "",
+            "key2":""
         }
     },
     "npp": {
@@ -382,7 +410,8 @@
         "BasePath": "/",
         "Res": "",
         "Desc": "大气校正图(真彩色)",
-        "Key": ""
+          "key1": "",
+          "key2":""
      }
   },
     "terra": {
@@ -392,7 +421,8 @@
         "BasePath": "/",
         "Res": "",
         "Desc": "大气校正图(真彩色)",
-        "Key": ""
+          "key1": "",
+          "key2":""
     }
   }
 }
