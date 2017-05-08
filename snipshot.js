@@ -65,13 +65,15 @@ function _snip_GLL(req,res,next) {
         if (err) {
             next(err, null);
         }
-        // if (fileType.toLowerCase() == ".jpg") {
-        //     res.writeHeader("Content-Type", "image/jpeg");
-        // }
-        // else{
-        //     res.writeHeader("Content-Type", "image/png");
-        // }
-        //res.title("test.jpg");
+        if (fileType.toLowerCase() == ".jpg") {
+            res.setHeader("Content-Type", "image/jpeg");
+            res.setHeader("Content-Disposition", "filename="+prodType+"_"+dateTime+"_"+topLeftLat+"_"+topLeftLon+"_"+bottomRightLat+"_"+bottomRightLon+"_"+config.Res+".jpg");
+        }
+        else{
+            res.setHeader("Content-Type", "image/png");
+            res.setHeader("Content-Disposition", "filename="+prodType+"_"+dateTime+"_"+topLeftLat+"_"+topLeftLon+"_"+bottomRightLat+"_"+bottomRightLon+"_"+config.Res+".png");
+        }
+
         res.end(data);
         next();
     });

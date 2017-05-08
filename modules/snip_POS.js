@@ -49,6 +49,7 @@ exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,
         var shotLonScope = b_r_lon - t_l_lon;
         var cutWidth = Math.floor(shotLonScope * perLonLines);
         var cutHeight = Math.floor(shotLatScope * perLatLines);
+        console.log("cutWidth = " + cutWidth + ",cutHeight = " + cutHeight);
         //获取待截图列表
         var shotFiles = _getShotList(files,t_l_lat,t_l_lon,b_r_lat,b_r_lon);
 
@@ -60,52 +61,22 @@ exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,
             var ctx = canvas.getContext('2d');
             var iOffset = 0;
             var jOffset = 0;
-            var tmp = 0;
+
             shotFiles.forEach(function (item) {
                     console.log("*******************");
-                    console.log("item=" + item.fileName);
-                    tmp = item.width + iOffset;
                     //如果文件没找到，则忽略
                     if(item.fileName != ""){
                         iOffset = (item.block_l_t_lon - t_l_lon) * perLonLines;
                         jOffset = (t_l_lat - item.block_l_t_lat) * perLatLines;
-                        console.log("*******************");
+                        console.log("item=" + item.fileName);
                         console.log("item.block_l_t_lon = " + item.block_l_t_lon + ",item.block_l_t_lat = " + item.block_l_t_lat);
+                        console.log("item.width = " + item.width + ",item.height = " + item.height);
                         console.log("iOffset = " + iOffset + ",jOffset = " + jOffset);
                         var buf = fs.readFileSync(item.fileName);
                         var srcImg = new Image;
                         srcImg.src = buf;
-                        ctx.drawImage(srcImg, iOffset, jOffset, item.width, item.height);
+                        ctx.drawImage(srcImg, iOffset, jOffset, perBlockWidth, perBlockHeight);
                     }
-                    //未找到文件
-                    // if(item.fileName == ""){
-                    //     if (tmp <= cutWidth) {
-                    //         iOffset = tmp;
-                    //         console.log("iOffset = " + iOffset);
-                    //         console.log("jOffset = " + jOffset);
-                    //     }
-                    //     if(iOffset >= cutWidth){
-                    //         jOffset = item.height + jOffset;
-                    //         iOffset = 0;
-                    //     }
-                    // }
-                    // else {
-                    //     var buf = fs.readFileSync(item.fileName);
-                    //     var srcImg = new Image;
-                    //     srcImg.src = buf;
-                    //     if (tmp <= cutWidth) {
-                    //         console.log("*******************");
-                    //         console.log("iOffset = " + iOffset);
-                    //         console.log("jOffset = " + jOffset);
-                    //         console.log("*******************");
-                    //         ctx.drawImage(srcImg, iOffset, jOffset, item.width, item.height);
-                    //         iOffset = tmp;
-                    //     }
-                    //     if(iOffset >= cutWidth){
-                    //         jOffset = item.height + jOffset;
-                    //         iOffset = 0;
-                    //     }
-                    // }
                 }
             );
             console.log("draw ok");
@@ -189,6 +160,13 @@ function ItemModel() {
             self.jOffset = 0;
             self.width = perBlockWidth;
             self.height = perBlockHeight;
+        }
+        //该截图区域完全包含在一个10°块文件内
+        else if(self.block_l_t_lat > l_t_lat && self.block_l_t_lon < l_t_lon && self.block_r_b_lat < r_b_lat && self.block_r_b_lon > r_b_lon){
+            self.iOffset = (l_t_lon - self.block_l_t_lon) * perLonLines;
+            self.jOffset = (self.block_l_t_lat - l_t_lat) * perLatLines;
+            self.width = (r_b_lon - l_t_lon) * perLonLines;
+            self.height = (l_t_lat - r_b_lat) * perLatLines;
         }
         else{
             //10°块经度范围包含了左上角经度,说明该10°块文件在截图区域的左边线上
