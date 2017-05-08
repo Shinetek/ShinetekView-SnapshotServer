@@ -65,35 +65,47 @@ exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,
                     console.log("*******************");
                     console.log("item=" + item.fileName);
                     tmp = item.width + iOffset;
-                    //未找到文件
-                    if(item.fileName == ""){
-                        if (tmp <= cutWidth) {
-                            iOffset = tmp;
-                            console.log("iOffset = " + iOffset);
-                            console.log("jOffset = " + jOffset);
-                        }
-                        if(iOffset >= cutWidth){
-                            jOffset = item.height + jOffset;
-                            iOffset = 0;
-                        }
-                    }
-                    else {
+                    //如果文件没找到，则忽略
+                    if(item.fileName != ""){
+                        iOffset = (item.block_l_t_lon - t_l_lon) * perLonLines;
+                        jOffset = (t_l_lat - item.block_l_t_lat) * perLatLines;
+                        console.log("*******************");
+                        console.log("item.block_l_t_lon = " + item.block_l_t_lon + ",item.block_l_t_lat = " + item.block_l_t_lat);
+                        console.log("iOffset = " + iOffset + ",jOffset = " + jOffset);
                         var buf = fs.readFileSync(item.fileName);
                         var srcImg = new Image;
                         srcImg.src = buf;
-                        if (tmp <= cutWidth) {
-                            console.log("*******************");
-                            console.log("iOffset = " + iOffset);
-                            console.log("jOffset = " + jOffset);
-                            console.log("*******************");
-                            ctx.drawImage(srcImg, iOffset, jOffset, item.width, item.height);
-                            iOffset = tmp;
-                        }
-                        if(iOffset >= cutWidth){
-                            jOffset = item.height + jOffset;
-                            iOffset = 0;
-                        }
+                        ctx.drawImage(srcImg, iOffset, jOffset, item.width, item.height);
                     }
+                    //未找到文件
+                    // if(item.fileName == ""){
+                    //     if (tmp <= cutWidth) {
+                    //         iOffset = tmp;
+                    //         console.log("iOffset = " + iOffset);
+                    //         console.log("jOffset = " + jOffset);
+                    //     }
+                    //     if(iOffset >= cutWidth){
+                    //         jOffset = item.height + jOffset;
+                    //         iOffset = 0;
+                    //     }
+                    // }
+                    // else {
+                    //     var buf = fs.readFileSync(item.fileName);
+                    //     var srcImg = new Image;
+                    //     srcImg.src = buf;
+                    //     if (tmp <= cutWidth) {
+                    //         console.log("*******************");
+                    //         console.log("iOffset = " + iOffset);
+                    //         console.log("jOffset = " + jOffset);
+                    //         console.log("*******************");
+                    //         ctx.drawImage(srcImg, iOffset, jOffset, item.width, item.height);
+                    //         iOffset = tmp;
+                    //     }
+                    //     if(iOffset >= cutWidth){
+                    //         jOffset = item.height + jOffset;
+                    //         iOffset = 0;
+                    //     }
+                    // }
                 }
             );
             console.log("draw ok");
@@ -151,25 +163,28 @@ function ItemModel() {
     self.width = 0;
     self.height = 0;
     self.fileName = "";
+    self.block_l_t_lat = 0;
+    self.block_l_t_lon = 0;
+    self.block_r_b_lat = 0;
+    self.block_r_b_lon = 0;
     self.tNo = 0;
 
     self.check = function (l_t_lat,l_t_lon,r_b_lat,r_b_lon) {
-        var block_l_t_lat,block_l_t_lon,block_r_b_lat,block_r_b_lon;
-        block_l_t_lat = 90 - parseInt(self.tNo / blockLon) * latScope;
-        block_l_t_lon = -180 + parseInt(self.tNo % blockLon) * lonScope;
-        block_r_b_lat = Number(block_l_t_lat) - Number(latScope);
-        block_r_b_lon = Number(block_l_t_lon) + Number(lonScope);
+        self.block_l_t_lat = 90 - parseInt(self.tNo / blockLon) * latScope;
+        self.block_l_t_lon = -180 + parseInt(self.tNo % blockLon) * lonScope;
+        self.block_r_b_lat = Number(self.block_l_t_lat) - Number(latScope);
+        self.block_r_b_lon = Number(self.block_l_t_lon) + Number(lonScope);
         //首先判断是否不在截取范围内
         //对超出截图区域的忽略
-        if((block_l_t_lat <= r_b_lat) ||
-            (block_r_b_lat >= l_t_lat) ||
-            (block_r_b_lon <= l_t_lon) ||
-            (block_l_t_lon >= r_b_lon)){
+        if((self.block_l_t_lat <= r_b_lat) ||
+            (self.block_r_b_lat >= l_t_lat) ||
+            (self.block_r_b_lon <= l_t_lon) ||
+            (self.block_l_t_lon >= r_b_lon)){
             return false;
         }
 
         //该10°块文件完全包含在截图范围内
-        if(block_l_t_lat <= l_t_lat && block_l_t_lon >=l_t_lon && block_r_b_lat >= r_b_lat && block_r_b_lon <= r_b_lon) {
+        if(self.block_l_t_lat <= l_t_lat && self.block_l_t_lon >=l_t_lon && self.block_r_b_lat >= r_b_lat && self.block_r_b_lon <= r_b_lon) {
             self.iOffset = 0;
             self.jOffset = 0;
             self.width = perBlockWidth;
@@ -177,58 +192,58 @@ function ItemModel() {
         }
         else{
             //10°块经度范围包含了左上角经度,说明该10°块文件在截图区域的左边线上
-            if(block_l_t_lon <= l_t_lon && block_r_b_lon >= l_t_lon){
-                self.iOffset = (l_t_lon - block_l_t_lon) * perLonLines;
+            if(self.block_l_t_lon <= l_t_lon && self.block_r_b_lon >= l_t_lon){
+                self.iOffset = (l_t_lon - self.block_l_t_lon) * perLonLines;
                 self.width = perBlockWidth - self.iOffset;
                 //如果10°块文件在截图左侧线上，不包含左上角和左下角
-                if(block_l_t_lat <= l_t_lat && block_r_b_lat >= r_b_lat){
+                if(self.block_l_t_lat <= l_t_lat && self.block_r_b_lat >= r_b_lat){
                     self.jOffset = 0;
                     self.height = perBlockHeight;
                 }
                 //如果10°块文件在截图左侧线上，包含截图区域左上角
-                else if(block_l_t_lat > l_t_lat && block_r_b_lat < l_t_lat){
-                    self.jOffset = (block_l_t_lat - l_t_lat) * perLatLines;
+                else if(self.block_l_t_lat > l_t_lat && self.block_r_b_lat < l_t_lat){
+                    self.jOffset = (self.block_l_t_lat - l_t_lat) * perLatLines;
                     self.height = perBlockHeight - self.jOffset;
                 }
                 //如果10°块文件在截图左侧线上，包含截图区域左下角
                 else{
                     self.jOffset = 0;
-                    self.height = (block_l_t_lat - r_b_lat) * perLatLines;
+                    self.height = (self.block_l_t_lat - r_b_lat) * perLatLines;
                 }
             }
             //10°块经度范围包含了右下角经度,说明该10°块文件在截图区域的右边线上
-            else if(block_l_t_lon <= r_b_lon && block_r_b_lon >= r_b_lon){
+            else if(self.block_l_t_lon <= r_b_lon && self.block_r_b_lon >= r_b_lon){
                 self.iOffset = 0;
-                self.width = (r_b_lon - block_l_t_lon) * perLonLines;
+                self.width = (r_b_lon - self.block_l_t_lon) * perLonLines;
                 //如果10°块文件在截图右侧线上，不包含右上角和右下角
-                if(block_l_t_lat <= l_t_lat && block_r_b_lat >= r_b_lat){
+                if(self.block_l_t_lat <= l_t_lat && self.block_r_b_lat >= r_b_lat){
                     self.jOffset = 0;
                     self.height = perBlockHeight;
                 }
                 //如果10°块文件在截图右侧线上，包含截图区域右上角
-                else if(block_l_t_lat > l_t_lat && block_r_b_lat < l_t_lat){
-                    self.jOffset = (block_l_t_lat - l_t_lat) * perLatLines;
+                else if(self.block_l_t_lat > l_t_lat && self.block_r_b_lat < l_t_lat){
+                    self.jOffset = (self.block_l_t_lat - l_t_lat) * perLatLines;
                     self.height = perBlockHeight - self.jOffset;
                 }
                 //如果10°块文件在截图右侧线上，包含截图区域右下角
                 else{
                     self.jOffset = 0;
-                    self.height = (block_l_t_lat - r_b_lat) * perLatLines;
+                    self.height = (self.block_l_t_lat - r_b_lat) * perLatLines;
                 }
             }
             //10°块经度范围包含了左上角纬度,说明该10°块文件在截图区域的上边线上
-            else if(block_l_t_lat >= l_t_lat && block_r_b_lat <= l_t_lat){
+            else if(self.block_l_t_lat >= l_t_lat && self.block_r_b_lat <= l_t_lat){
                 self.iOffset = 0;
-                self.jOffset = (block_l_t_lat - l_t_lat) * perLatLines;
+                self.jOffset = (self.block_l_t_lat - l_t_lat) * perLatLines;
                 self.width = perBlockWidth;
                 self.height = perBlockHeight - self.jOffset;
             }
             //10°块经度范围包含了右下角纬度,说明该10°块文件在截图区域的下边线上
-            else if(block_l_t_lat >= r_b_lat && block_r_b_lat <= r_b_lat){
+            else if(self.block_l_t_lat >= r_b_lat && self.block_r_b_lat <= r_b_lat){
                 self.iOffset = 0;
                 self.jOffset = 0;
                 self.width = perBlockWidth;
-                self.height = (block_l_t_lat - r_b_lat) * perLatLines;
+                self.height = (self.block_l_t_lat - r_b_lat) * perLatLines;
             }
         }
         return true;
