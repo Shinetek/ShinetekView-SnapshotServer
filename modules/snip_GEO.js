@@ -34,13 +34,14 @@ exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,
         }
         console.log(files.length);
         for(var tmpName in files){
-            console.log(files[tmpName]);
-            if(files[tmpName].indexOf(config.Res)!=-1 && files[tmpName].indexOf(config.Key)!=-1 && files[tmpName].indexOf("THUMB")==-1){
+
+            if(files[tmpName].indexOf(config.Res)!=-1 && files[tmpName].indexOf(config.Key)!=-1
+                && files[tmpName].indexOf("THUMB")==-1 && files[tmpName].indexOf("thumb")==-1 && files[tmpName].indexOf("_cb")==-1){
+                console.log("find file:" + files[tmpName] + " 开始处理...");
                 isFind = true;
-                console.log("find file");
                 var srcImagePath = files[tmpName];
                 //srcImagePath = config.BasePath + "H8_20170322_0040_15_155_-80_80_1000M.jpg";
-                console.log(srcImagePath);
+                //console.log(srcImagePath);
                 //获取原图的大小
                 var srcWidth = config.Width;
                 var srcHeight = config.Height;
@@ -73,15 +74,15 @@ exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,
                     if(err){
                         next(err,null);
                     }
-                                
-                    var canvas = new Canvas(cutWidth,cutHeight);
-                    var ctx = canvas.getContext('2d');
-                    var srcImg = new Image;
-                    srcImg.src = buf;
-                    ctx.drawImage(srcImg,iOffset,jOffset,srcWidth,srcHeight);
-                    console.log("draw ok");                                                               
-                    next(null,canvas.toBuffer());                    
-
+                    else {
+                        var canvas = new Canvas(cutWidth, cutHeight);
+                        var ctx = canvas.getContext('2d');
+                        var srcImg = new Image;
+                        srcImg.src = buf;
+                        ctx.drawImage(srcImg, iOffset, jOffset, srcWidth, srcHeight);
+                        console.log("draw ok");
+                        next(null, canvas.toBuffer());
+                    }
                 });
             }
         }

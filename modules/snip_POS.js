@@ -32,55 +32,61 @@ exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,
     //查找原图文件列表
     var filterKey = config.key1 + "*" + config.Res + "*" + config.key2 + "*" + fileType;
     console.log(filterKey);
-    var tmpBasePath = config.BasePath + "/" + dateTime + "/GLL/";
+    var tmpBasePath = config.BasePath  + dateTime + "/GLL/";
+    console.log(tmpBasePath);
     glob(tmpBasePath + filterKey, function (err, files) {
+        console.log(files.length);
         if(err){
             next(err,null);
         }
-        latScope = Number(config.LatScope);
-        lonScope = Number(config.LonScope);
-        blockLat = 180 / latScope; //在纬度上有多少块
-        blockLon = 360 / lonScope; //在经度上有多少块
-        perBlockHeight = Number(config.Height);
-        perBlockWidth = Number(config.Width);
-        perLatLines = perBlockHeight / latScope;
-        perLonLines = perBlockWidth / lonScope;
-        var shotLatScope = t_l_lat - b_r_lat;
-        var shotLonScope = b_r_lon - t_l_lon;
-        var cutWidth = Math.floor(shotLonScope * perLonLines);
-        var cutHeight = Math.floor(shotLatScope * perLatLines);
-        console.log("cutWidth = " + cutWidth + ",cutHeight = " + cutHeight);
-        //获取待截图列表
-        var shotFiles = _getShotList(files,t_l_lat,t_l_lon,b_r_lat,b_r_lon);
+        else {
+            latScope = Number(config.LatScope);
+            lonScope = Number(config.LonScope);
+            blockLat = 180 / latScope; //在纬度上有多少块
+            blockLon = 360 / lonScope; //在经度上有多少块
+            perBlockHeight = Number(config.Height);
+            perBlockWidth = Number(config.Width);
+            perLatLines = perBlockHeight / latScope;
+            perLonLines = perBlockWidth / lonScope;
+            var shotLatScope = t_l_lat - b_r_lat;
+            var shotLonScope = b_r_lon - t_l_lon;
+            var cutWidth = Math.floor(shotLonScope * perLonLines);
+            var cutHeight = Math.floor(shotLatScope * perLatLines);
+            console.log("blockLat="+blockLat);
+            console.log("perLatLines="+perLatLines);
+            console.log("cutWidth = " + cutWidth + ",cutHeight = " + cutHeight);
+            //获取待截图列表
+            var shotFiles = _getShotList(files, t_l_lat, t_l_lon, b_r_lat, b_r_lon);
 
-        if (shotFiles.length == 0) {
-            next("find error", null);
-        }
-        else{
-            var canvas = new Canvas(cutWidth,cutHeight);
-            var ctx = canvas.getContext('2d');
-            var iOffset = 0;
-            var jOffset = 0;
+            if (shotFiles.length == 0) {
+                next("find error", null);
+            }
+            else {
+                var canvas = new Canvas(cutWidth, cutHeight);
+                var ctx = canvas.getContext('2d');
+                var iOffset = 0;
+                var jOffset = 0;
 
-            shotFiles.forEach(function (item) {
-                    console.log("*******************");
-                    //如果文件没找到，则忽略
-                    if(item.fileName != ""){
-                        iOffset = (item.block_l_t_lon - t_l_lon) * perLonLines;
-                        jOffset = (t_l_lat - item.block_l_t_lat) * perLatLines;
-                        console.log("item=" + item.fileName);
-                        console.log("item.block_l_t_lon = " + item.block_l_t_lon + ",item.block_l_t_lat = " + item.block_l_t_lat);
-                        console.log("item.width = " + item.width + ",item.height = " + item.height);
-                        console.log("iOffset = " + iOffset + ",jOffset = " + jOffset);
-                        var buf = fs.readFileSync(item.fileName);
-                        var srcImg = new Image;
-                        srcImg.src = buf;
-                        ctx.drawImage(srcImg, iOffset, jOffset, perBlockWidth, perBlockHeight);
+                shotFiles.forEach(function (item) {
+                        console.log("*******************");
+                        //如果文件没找到，则忽略
+                        if (item.fileName != "") {
+                            iOffset = (item.block_l_t_lon - t_l_lon) * perLonLines;
+                            jOffset = (t_l_lat - item.block_l_t_lat) * perLatLines;
+                            console.log("item=" + item.fileName);
+                            console.log("item.block_l_t_lon = " + item.block_l_t_lon + ",item.block_l_t_lat = " + item.block_l_t_lat);
+                            console.log("item.width = " + item.width + ",item.height = " + item.height);
+                            console.log("iOffset = " + iOffset + ",jOffset = " + jOffset);
+                            var buf = fs.readFileSync(item.fileName);
+                            var srcImg = new Image;
+                            srcImg.src = buf;
+                            ctx.drawImage(srcImg, iOffset, jOffset, perBlockWidth, perBlockHeight);
+                        }
                     }
-                }
-            );
-            console.log("draw ok");
-            next(null, canvas.toBuffer());
+                );
+                console.log("draw ok");
+                next(null, canvas.toBuffer());
+            }
         }
     });
 };
@@ -97,35 +103,56 @@ exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,
 function  _getShotList(files,l_t_lat,l_t_lon,r_b_lat,r_b_lon) {
     var shotFiles = [];  //待截图的所有文件
     var tmpStr = null;
+    var tmpSplit = [];
     var imageModel = null;
-    //计算第一个在截图区域的文件编号，编号从0开始
-    var tmpStartIndex = parseInt((90 - l_t_lat) / latScope);
-    tmpStartIndex = parseInt((Number(l_t_lon) + 180) / lonScope) + Number(tmpStartIndex * blockLon);
-    //计算最后一个在截图区域的文件编号
-    var tmpEndIndex = parseInt((90 - r_b_lat) / latScope);
-    tmpEndIndex = parseInt((Number(r_b_lon) + 180) / lonScope) + tmpEndIndex * blockLon;
+    // //计算第一个在截图区域的文件编号，编号从0开始
+    // var tmpStartIndex = parseInt((90 - l_t_lat) / latScope);
+    // tmpStartIndex = parseInt((Number(l_t_lon) + 180) / lonScope) + Number(tmpStartIndex * blockLon);
+    // //计算最后一个在截图区域的文件编号
+    // var tmpEndIndex = parseInt((90 - r_b_lat) / latScope);
+    // tmpEndIndex = parseInt((Number(r_b_lon) + 180) / lonScope) + tmpEndIndex * blockLon;
+    // for(var tmpIndex = tmpStartIndex;tmpIndex <= tmpEndIndex;tmpIndex++){
+    //     imageModel = new ItemModel();
+    //     imageModel.tNo = tmpIndex;
+    //     if(imageModel.check(l_t_lat,l_t_lon,r_b_lat,r_b_lon)){
+    //         //获取文件名
+    //         files.forEach(function (item) {
+    //             if(item.indexOf("events") == -1) {  //将.events后缀名的文件排除
+    //                 tmpStr = item.split("/");
+    //                 tmpStr = tmpStr[tmpStr.length - 1];  //从全路径中获取文件名
+    //                 tmpStr = tmpStr.split("_");
+    //                 if(parseInt(tmpStr[2].replace("T","")) == tmpIndex){
+    //                     imageModel.fileName = item;
+    //                 }
+    //             }
+    //         });
+    //         shotFiles.push(imageModel);
+    //     }
+    //
+    // }
 
-    for(var tmpIndex = tmpStartIndex;tmpIndex <= tmpEndIndex;tmpIndex++){
-        imageModel = new ItemModel();
-        imageModel.tNo = tmpIndex;
-        if(imageModel.check(l_t_lat,l_t_lon,r_b_lat,r_b_lon)){
-            //获取文件名
-            files.forEach(function (item) {
-                if(item.indexOf("events") == -1) {  //将.events后缀名的文件排除
-                    tmpStr = item.split("/");
-                    tmpStr = tmpStr[tmpStr.length - 1];  //从全路径中获取文件名
-                    tmpStr = tmpStr.split("_");
-                    if(parseInt(tmpStr[2].replace("T","")) == tmpIndex){
-                        imageModel.fileName = item;
-                    }
-                }
-            });
-            shotFiles.push(imageModel);
+    files.forEach(function (item) {
+        if(item.indexOf("events") == -1) {  //将.events后缀名的文件排除
+            imageModel = new ItemModel();
+            tmpSplit = item.split("/");
+            tmpStr = tmpSplit[tmpSplit.length - 1];  //从全路径中获取文件名
+            console.log("文件名:" + tmpStr);
+            tmpSplit = tmpStr.split("_");
+            tmpStr = tmpSplit[2];
+            console.log("TNO:" + tmpStr);
+            imageModel.tNo = parseInt(tmpStr.replace("T",""));
+            console.log(imageModel.tNo);
+            imageModel.fileName = item;
+            if(imageModel.check(l_t_lat,l_t_lon,r_b_lat,r_b_lon)){
+                shotFiles.push(imageModel);
+            }
+
         }
-
-    }
+    });
     return shotFiles;
 }
+
+
 
 function ItemModel() {
     var self = this;
@@ -141,7 +168,7 @@ function ItemModel() {
     self.tNo = 0;
 
     self.check = function (l_t_lat,l_t_lon,r_b_lat,r_b_lon) {
-        self.block_l_t_lat = 90 - parseInt(self.tNo / blockLon) * latScope;
+        self.block_l_t_lat = -80 + parseInt(self.tNo / blockLon) * latScope;
         self.block_l_t_lon = -180 + parseInt(self.tNo % blockLon) * lonScope;
         self.block_r_b_lat = Number(self.block_l_t_lat) - Number(latScope);
         self.block_r_b_lon = Number(self.block_l_t_lon) + Number(lonScope);

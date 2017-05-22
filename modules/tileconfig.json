@@ -1,4 +1,6 @@
 {
+    "IP" : "10.24.10.108",
+    "Port" : 4205,
     "fy4a" : {
         "SatType" : "GEO",
         "OutPath" : "/FY4A/TMP/",
@@ -14,21 +16,8 @@
             "Width":"14001",
             "Height":"12001"
         },
-        "FY4A_AGRI_PRJ_4000M_1350":{
-            "BasePath1" : "/CVSDATANAS/FY4A/AGRI/D1B/CVSIMAGE/PRJ/",
-            "BasePath" : "/FY4COMM/webclient/ShinetekView-SnapshotServer/DATA/",
-            "Res":"4000M",
-            "Desc":"可见光云图(2000m)",
-            "Key":"QPE",
-            "TopLeftLat":"70",
-            "TopLeftLon":"44",
-            "BottomRightLat":"-70",
-            "BottomRightLon":"155",
-            "Width":"1751",
-            "Height":"1501"
-        },
         "FY4A_AGRI_EVI_1000":{
-            "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/EVI/",
+            "BasePath" : "/FY4COMM/FY4A/L3/AGRIX/EVI/",
             "Res":"1000M",
             "Desc":"增强型植被指数",
             "Key":"_1000M_EVI",
@@ -111,11 +100,23 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_ConvectiveInitiation_4000":{
+        "FY4A_AGRI_CIX_ConvectiveInitiation_4000":{
+            "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CIX/",
+            "Res":"4000M",
+            "Desc":"对流初生(概率)",
+            "Key":"_CIX_Convective_Initiation_0",
+            "TopLeftLat":"60",
+            "TopLeftLon":"70",
+            "BottomRightLat":"0",
+            "BottomRightLon":"140",
+            "Width":"1751",
+            "Height":"1501"
+        },
+        "FY4A_AGRI_CIX_RDC_Rank_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/CIX/",
             "Res":"4000M",
             "Desc":"对流初生(强度)",
-            "Key":"CIX",
+            "Key":"_CIX_RDC_Rank_0",
             "TopLeftLat":"60",
             "TopLeftLon":"70",
             "BottomRightLat":"0",
@@ -243,7 +244,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_OCA_ADO0_4000":{
+        "FY4A_AGRI_OCA_AOD0_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/OCA/",
             "Res":"4000M",
             "Desc":"海洋气溶胶(0.47um)",
@@ -255,7 +256,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_LDA_ADO1_4000":{
+        "FY4A_AGRI_LDA_AOD1_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/LDA/",
             "Res":"4000M",
             "Desc":"陆地气溶胶(0.55um)",
@@ -293,7 +294,7 @@
             "Height" : "1501"
         },
         "FY4A_AGRI_LST_4000":{
-            "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/LST/",
+            "BasePath" : "/FY4COMM/FY4A/L3/AGRIX/LST/",
             "Res":"4000M",
             "Desc":"地表温度",
             "Key":"LST",
@@ -305,7 +306,7 @@
             "Height":"1501"
         },
         "FY4A_AGRI_SST_4000":{
-            "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/SST/",
+            "BasePath" : "/FY4COMM/FY4A/L3/AGRIX/SST/",
             "Res":"4000M",
             "Desc":"海表温度",
             "Key":"SST",
@@ -316,7 +317,7 @@
             "Width":"1751",
             "Height":"1501"
         },
-        "FY4A_AGRI_OCA_ADO1_4000":{
+        "FY4A_AGRI_OCA_AOD1_4000":{
             "BasePath" : "/FY4COMM/FY4A/L2/AGRIX/OCA/",
             "Res":"4000M",
             "Desc":"海洋气溶胶(0.65um)",
@@ -333,7 +334,7 @@
         "SatType" : "POS",
         "OutPath": "/FY3B/TMP/",
         "FY3B_MERSI_321": {
-            "BasePath": "/FY4COMM/webclient/ShinetekView-SnapshotServer/DATA/FY3B/MIPSOUT/",
+            "BasePath": "/shkdata/FY3B/MIPSOUT/",
             "Res": "250M",
             "Desc": "大气校正图(真彩色321)",
             "Width":"4000",
@@ -344,7 +345,7 @@
             "key2":"03_02_01"
         },
         "FY3B_MERSI_743": {
-            "BasePath": "/FY4COMM/webclient/ShinetekView-SnapshotServer/DATA/FY3B/MIPSOUT/",
+            "BasePath": "/shkdata/FY3B/MIPSOUT/",
             "Res": "250M",
             "Desc": "大气校正图(真彩色743)",
             "Width":"4000",
@@ -359,26 +360,26 @@
         "SatType" : "POS",
         "OutPath": "/FY3C/TMP/",
         "FY3C_VIRR_121": {
-            "BasePath": "/",
-            "Res": "250M",
+            "BasePath": "/shkdata/FY3C/MIPSOUT/",
+            "Res": "1000M",
             "Desc": "大气校正图(真彩色121)",
-            "Width":"4000",
-            "Height":"4000",
+            "Width":"1000",
+            "Height":"1000",
             "LatScope":"10",
             "LonScope":"10",
-            "key1":"FY3C_VIRR",
+            "key1":"FY3C_VIRRX",
             "key2":"01_02_01"
         },
-        "FY3C_VIRR_191": {
-            "BasePath": "/",
-            "Res": "250M",
+        "FY3C_VIRR_197": {
+            "BasePath": "/shkdata/FY3C/MIPSOUT/",
+            "Res": "1000M",
             "Desc": "大气校正图(真彩色191)",
-            "Width":"4000",
-            "Height":"4000",
+            "Width":"1000",
+            "Height":"1000",
             "LatScope":"10",
             "LonScope":"10",
-            "key1":"FY3C_VIRR",
-            "Key":"01_09_01"
+            "key1":"FY3C_VIRRX",
+            "key2":"01_09_07"
         }
     },
     "noaa18": {

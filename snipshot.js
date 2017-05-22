@@ -6,8 +6,8 @@ var server = restify.createServer({
     name:"snipshot",
     version:"0.0.1"
 });
-var serverIP = shkUtil.getLoacalIP();
-var port = (process.argv[2]) ? process.argv[2] : 4205;
+var serverIP = satConfig.IP;//"123.56.135.196";//shkUtil.getLoacalIP();
+var port = (process.argv[2]) ? process.argv[2] : satConfig.Port;
 var PATH = "/snipshot";
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
@@ -35,14 +35,34 @@ server.listen(port,serverIP,function () {
 });
 
 function _snip_GLL(req,res,next) {
-    console.log(req.params.prodtype);
     var prodType = req.params.prodtype;  //产品类型
-    var topLeftLat = req.params.toplat;     //左上角纬度
-    var topLeftLon = req.params.toplon;     //左上角经度
-    var bottomRightLat = req.params.bottomlat;   //右下角纬度
-    var bottomRightLon = req.params.bottomlon;   //右下角经度
+    var topLeftLat = Number(req.params.toplat);     //左上角纬度
+    var topLeftLon = Number(req.params.toplon);     //左上角经度
+    var bottomRightLat = Number(req.params.bottomlat);   //右下角纬度
+    var bottomRightLon = Number(req.params.bottomlon);   //右下角经度
     var dateTime = req.params.date;     //时次
     var fileType = req.params.filetype;     //文件类型，jpg or png
+    //判断经纬度范围是否正确
+    var tmp = topLeftLat;
+    if(topLeftLat < bottomRightLat){
+        topLeftLat = bottomRightLat;
+        bottomRightLat = tmp;
+    }
+    tmp = topLeftLon;
+    if(topLeftLon > bottomRightLon){
+        topLeftLon = bottomRightLon;
+        bottomRightLon = tmp;
+    }
+    console.log("topLeftLat=" + topLeftLat);
+    console.log("topLeftLon=" + topLeftLon);
+    console.log("bottomRightLat=" + bottomRightLat);
+    console.log("bottomRightLon=" + bottomRightLon);
+
+    if(topLeftLat > 90 || topLeftLat < -90 || bottomRightLat > 90 || bottomRightLat < -90 ||
+        topLeftLon > 180 || topLeftLon < -180 || bottomRightLon > 180 || bottomRightLon < -180 ){
+        res.send("param error");
+        return next();
+    }
 
     var isFind = false;
     for(var tmpConfig in satConfig) {
@@ -54,7 +74,8 @@ function _snip_GLL(req,res,next) {
         }
     }
     if(!isFind){
-        next("find config error",null);
+        res.send("find config error");
+        return next();
     }
     else{
         console.log("find config");
@@ -63,18 +84,21 @@ function _snip_GLL(req,res,next) {
     console.log("find module");
     module.snipImage_GLL(res,config,satConfig["OutPath"],topLeftLat,topLeftLon,bottomRightLat,bottomRightLon,dateTime,fileType, function (err, data) {
         if (err) {
+            res.send(err);
             next(err, null);
         }
-        if (fileType.toLowerCase() == ".jpg") {
-            res.setHeader("Content-Type", "image/jpeg");
-            res.setHeader("Content-Disposition", "filename="+prodType+"_"+dateTime+"_"+topLeftLat+"_"+topLeftLon+"_"+bottomRightLat+"_"+bottomRightLon+"_"+config.Res+".jpg");
-        }
-        else{
-            res.setHeader("Content-Type", "image/png");
-            res.setHeader("Content-Disposition", "filename="+prodType+"_"+dateTime+"_"+topLeftLat+"_"+topLeftLon+"_"+bottomRightLat+"_"+bottomRightLon+"_"+config.Res+".png");
-        }
+        else {
+            if (fileType.toLowerCase() == ".jpg") {
+                res.setHeader("Content-Type", "image/jpeg");
+                res.setHeader("Content-Disposition", "filename=" + prodType + "_" + dateTime + "_" + topLeftLat + "_" + topLeftLon + "_" + bottomRightLat + "_" + bottomRightLon + "_" + config.Res + ".jpg");
+            }
+            else {
+                res.setHeader("Content-Type", "image/png");
+                res.setHeader("Content-Disposition", "filename=" + prodType + "_" + dateTime + "_" + topLeftLat + "_" + topLeftLon + "_" + bottomRightLat + "_" + bottomRightLon + "_" + config.Res + ".png");
+            }
 
-        res.end(data);
-        next();
+            res.end(data);
+            next();
+        }
     });
 }
