@@ -1,6 +1,7 @@
 {
-    "IP" : "10.24.10.108",
+    "IP" : "10.24.4.117",
     "Port" : 4205,
+    "CutMaxSize" : 484000000,
     "fy4a" : {
         "SatType" : "GEO",
         "OutPath" : "/FY4A/TMP/",

@@ -19,6 +19,7 @@ var perBlockHeight = 0;//每个分块的高度，在配置文件中已经定义�
  * @param res 
  * @param config 配置信息
  * @param outPutPath 输出的临时目录
+ * @param maxCutSize 截取的最大范围
  * @param t_l_lat 截图范围左上角纬度
  * @param t_l_lon 截图范围左上角经度
  * @param b_r_lat 截图范围右下角纬度
@@ -27,7 +28,7 @@ var perBlockHeight = 0;//每个分块的高度，在配置文件中已经定义�
  * @param fileType 截取文件类型，jpg or png
  * @param next
  */
-exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,b_r_lon,dateTime,fileType, next) {
+exports.snipImage_GLL = function (res,config,outPutPath,maxCutSize,t_l_lat,t_l_lon,b_r_lat,b_r_lon,dateTime,fileType, next) {
     console.log("snipImage_GLL start");
     //查找原图文件列表
     var filterKey = config.key1 + "*" + config.Res + "*" + config.key2 + "*" + fileType;
@@ -55,6 +56,10 @@ exports.snipImage_GLL = function (res,config,outPutPath,t_l_lat,t_l_lon,b_r_lat,
             console.log("blockLat="+blockLat);
             console.log("perLatLines="+perLatLines);
             console.log("cutWidth = " + cutWidth + ",cutHeight = " + cutHeight);
+            if(cutWidth * cutHeight > maxCutSize){
+                return next("out of range",null);
+            }
+
             //获取待截图列表
             var shotFiles = _getShotList(files, t_l_lat, t_l_lon, b_r_lat, b_r_lon);
 
