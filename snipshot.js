@@ -30,7 +30,7 @@ server.get(
     { path : PATH },
     _snip_GLL
 );
-server.listen(port,serverIP,function () {
+server.listen(port,function () {
     console.log("%s listening at %s",server.name,server.url);
 });
 
